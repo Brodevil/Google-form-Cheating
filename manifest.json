@@ -1,0 +1,29 @@
+{
+   "action": {
+      "default_icon": {
+         "128": "icon/iith128.png",
+         "16": "icon/iith16.png",
+         "48": "icon/iith48.png"
+      },
+      "default_popup": "popup.html"
+   },
+   "content_scripts": [ {
+      "js": [ "front-backend.js" ],
+      "matches": [ "https://docs.google.com/forms/*", "https://forms.office.com/*" ],
+      "run_at": "document_idle"
+   } ],
+   "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self'"
+   },
+   "description": "CorrectlyAI - Auto-fills Google Forms using Gemini and ChatGPT APIs",
+   "host_permissions": [ "https://docs.google.com/forms/*", "https://forms.office.com/*", "https://generativelanguage.googleapis.com/*", "https://api.openai.com/*" ],
+   "icons": {
+      "128": "icon/iith128.png",
+      "16": "icon/iith16.png",
+      "48": "icon/iith48.png"
+   },
+   "manifest_version": 3,
+   "name": "CorrectlyAI",
+   "permissions": [ "activeTab", "storage", "scripting" ],
+   "version": "1.0.0"
+}

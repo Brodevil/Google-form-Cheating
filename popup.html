@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CorrectlyAI</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    />
+    <style>
+      * {
+        font-family: "Poppins", sans-serif;
+        cursor: default;
+      }
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 320px;
+      }
+
+      .container {
+        background: #fff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 16px;
+        text-align: center;
+        position: relative;
+      }
+
+      .header {
+        text-align: left;
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+      }
+
+      .header span {
+        color: #0078ff;
+        margin-right: 5px;
+      }
+
+      .button {
+        width: 100%;
+        padding: 10px;
+        background: #0078ff;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .button:hover {
+        background: #005bbd;
+      }
+
+      .button-light {
+        width: 100%;
+        padding: 10px;
+        color: #1d1d1d;
+        border: 1px #1d1d1d89 solid;
+        border-radius: 800px;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+        background: #ffffff;
+      }
+
+      .button-light:hover {
+        background: #f4f4f4;
+      }
+
+      .tutorial {
+        text-align: left;
+        width: 100%;
+        overflow: hidden;
+        margin-top: 15px;
+        font-size: 14px;
+      }
+
+      .tutorial iframe {
+        height: 165px;
+        margin-top: 8px;
+        width: 100%;
+        display: block;
+        border-radius: 8px;
+      }
+
+      .login-content {
+        margin-top: 10px;
+        text-align: center;
+      }
+
+      .login-button {
+        margin-top: 16px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .cta {
+        font-size: 19px;
+        font-weight: bold;
+        color: #555;
+        margin-bottom: 16px;
+      }
+
+      .features {
+        margin-top: 10px;
+        text-align: left;
+        color: #666;
+        font-size: 14px;
+      }
+
+      .features ul {
+        padding-left: 20px;
+      }
+
+      .features ul li {
+        margin-bottom: 8px;
+      }
+
+      .user-icon {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid #ddd;
+      }
+
+      .user-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .user-icon:hover + .topmenu {
+        display: block;
+      }
+
+      .models {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .model img {
+        width: 65px;
+        text-align: center;
+        padding: 8px;
+        border: 3px solid #ddd;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+        height: 65px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .modelText {
+        font-size: 15px;
+        color: #666;
+        margin-top: 8px;
+      }
+
+      .model.selected img {
+        border-color: #0078ff;
+        background: #f0f8ff;
+      }
+
+      .model.selected .modelText {
+        color: black;
+        font-weight: 500;
+      }
+
+      .credits {
+        font-size: 54px;
+        font-weight: bold;
+        color: #0078ff;
+        margin: 0px 0 -16px;
+      }
+
+      .credits-label {
+        font-size: 14px;
+        color: #666;
+      }
+
+      .button.disabled {
+        background: #ddd;
+        cursor: not-allowed;
+        color: #666;
+      }
+
+      .button.disabled:hover {
+        background: #ddd;
+      }
+
+      .hover-image {
+        display: none;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .menu {
+        text-align: left;
+        top: 60px;
+        right: 0px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        z-index: 5;
+        background-color: #ffffff;
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: 0 0px 8px rgb(0 0 0 / 20%);
+        padding: 8px;
+      }
+
+      .topmenu {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        gap: 8px;
+        z-index: 5;
+        width: 56%;
+        display: none;
+        align-items: right;
+        text-align: right;
+        align-self: right;
+        align-content: right;
+        justify-content: right;
+        padding-top: 40px;
+      }
+
+      .topmenu:hover {
+        display: flex;
+      }
+
+      .menu-item {
+        background: #daebff;
+        border: none;
+        color: #333;
+        font-size: 15px;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 8px;
+        transition: background 0.3s;
+      }
+
+      .notifier {
+        z-index: 100;
+        text-align: left;
+        position: absolute;
+        background: #daeeff;
+        color: #0078ff;
+        padding: 8px 16px;
+        border-radius: 8px;
+        margin-bottom: 16px;
+        top: 50px;
+        font-size: 14px;
+        display: none;
+        min-width: 255px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .toggle-container {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        width: -webkit-fill-available;
+      }
+
+      .toggle-label {
+        font-size: 15px;
+        color: #666;
+        margin-left: 10px;
+        text-align: left;
+      }
+
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 28px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 28px;
+      }
+
+      .slider-knob {
+        position: absolute;
+        height: 22px;
+        width: 22px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+
+      .logo {
+        margin-right: 10px;
+      }
+
+      .unavailable {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="homeScreen">
+      <div class="header">
+        <img
+          class="logo"
+          src="icon/iith48.png"
+          alt="CorrectlyAI"
+          width="25"
+          height="25"
+        />
+        <span>CorrectlyAI</span>
+      </div>
+
+      <div class="notifier" id="notifier">
+        <span id="notification"></span>
+      </div>
+
+      <div style="margin-top: 15px; text-align: left;">
+        <label style="font-size: 14px; color: #666; display: block; margin-bottom: 8px; font-weight: bold;">AI Provider:</label>
+        <select 
+          id="providerSelect" 
+          style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; box-sizing: border-box; margin-bottom: 15px;"
+        >
+          <option value="gemini">Gemini (Google)</option>
+          <option value="openai">ChatGPT (OpenAI)</option>
+        </select>
+
+        <label style="font-size: 14px; color: #666; display: block; margin-bottom: 5px;" id="apiKeyLabel">Gemini API Key:</label>
+        <input 
+          type="password" 
+          id="apiKeyInput" 
+          placeholder="Enter your API key"
+          style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; box-sizing: border-box;"
+        />
+        <button 
+          id="saveApiKey" 
+          class="button" 
+          style="margin-top: 8px; width: 100%; padding: 8px; font-size: 14px;"
+        >
+          Save API Key
+        </button>
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 20px; flex-direction: column;">
+        <button class="button disabled" id="startButton">Solve Form</button>
+        <div id="loadingIndicator" style="display: none; text-align: center; margin-top: 10px;">
+          <div style="display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid #0078ff; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+          <span style="margin-left: 10px; color: #0078ff; font-size: 14px;">Processing...</span>
+        </div>
+        <div id="statusText" style="margin-top: 10px; font-size: 12px; color: #666; text-align: center; min-height: 20px;"></div>
+      </div>
+
+      <!-- make a toggle button "show button/answer on form" -->
+      <div class="toggle-container">
+        <label class="switch">
+          <input type="checkbox" id="toggleButton" />
+          <span class="slider round">
+            <span class="slider-knob"></span>
+          </span> </label
+        ><label for="toggleButton" class="toggle-label">
+          Show Answers on Form Page
+        </label>
+      </div>
+
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
